@@ -1,11 +1,4 @@
-@extends('template.base')
-@section('css', './css/app.css')
-@section('main')
-<main>
-    <div class="container">
-        
-    </div>
-</main>
+<a href="{{ route('comics.index') }}">View Listings</a>
 
-@endsection
+
     

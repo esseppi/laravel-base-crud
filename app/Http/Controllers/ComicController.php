@@ -15,7 +15,7 @@ class ComicController extends Controller
     public function index()
     {
         $comics = Comic::paginate(10);
-        return view('home', compact('comics'));
+        return view('comics.index', compact('comics'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ComicController extends Controller
         if ($comics) {
             return $comics;
         }
-        return 'item not found';
+        return view('comics.show', compact('comics'));
     }
 
     /**
@@ -109,6 +109,6 @@ class ComicController extends Controller
             return;
         }
         $comics = Comic::where('title', 'LIKE', '%' . $search_text . '%')->get();
-        return view('home', compact('comics'));
+        return view('comics.search', compact('comics'));
     }
 }
