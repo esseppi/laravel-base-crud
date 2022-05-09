@@ -1,0 +1,3 @@
+<footer>
+    BYE BYE
+</footer>

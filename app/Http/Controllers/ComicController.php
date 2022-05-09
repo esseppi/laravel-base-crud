@@ -14,7 +14,8 @@ class ComicController extends Controller
      */
     public function index()
     {
-        //
+        $comics = Comic::paginate(10);
+        return view('home', compact('comics'));
     }
 
     /**
@@ -35,7 +36,16 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Comics = new Comic;
+        $Comics->title = $request->item["title"];
+        $Comics->description = $request->item["description"];
+        $Comics->thumb = $request->item["thumb"];
+        $Comics->price = $request->item["price"];
+        $Comics->series = $request->item["series"];
+        $Comics->sale_date = $request->item["sale_date"];
+        $Comics->type = $request->item["type"];
+        $Comics->save();
+        return $Comics;
     }
 
     /**
@@ -46,7 +56,11 @@ class ComicController extends Controller
      */
     public function show(Comic $comic)
     {
-        //
+        $comics = Comic::find($comic);
+        if ($comics) {
+            return $comics;
+        }
+        return 'item not found';
     }
 
     /**
@@ -80,6 +94,21 @@ class ComicController extends Controller
      */
     public function destroy(Comic $comic)
     {
-        //
+        $comics = Comic::find($comic);
+        if ($comics) {
+            $comics->delete();
+            return redirect()->back();
+        }
+        return 'item not found';
+    }
+
+    public function search()
+    {
+        $search_text = $_GET['query'];
+        if ($search_text = '') {
+            return;
+        }
+        $comics = Comic::where('title', 'LIKE', '%' . $search_text . '%')->get();
+        return view('home', compact('comics'));
     }
 }
