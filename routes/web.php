@@ -15,5 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/', 'HomeController@index')->name('home');
 Route::resource('/comics', 'ComicController');
-Route::resource('/', 'ComicController');
-Route::delete('destroy/{id}', 'ComicController@destroy')->name('destroy');
+Route::get('/', 'ComicController@index')->name('home');
