@@ -15,7 +15,7 @@ class ComicController extends Controller
     public function index()
     {
         $comics = Comic::paginate(10);
-        return view('comics.index', compact('comics'));
+        return view('home', compact('comics'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ComicController extends Controller
      */
     public function create()
     {
-        //
+        return view('comics.create');
     }
 
     /**
@@ -36,16 +36,20 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        $Comics = new Comic;
-        $Comics->title = $request->item["title"];
-        $Comics->description = $request->item["description"];
-        $Comics->thumb = $request->item["thumb"];
-        $Comics->price = $request->item["price"];
-        $Comics->series = $request->item["series"];
-        $Comics->sale_date = $request->item["sale_date"];
-        $Comics->type = $request->item["type"];
-        $Comics->save();
-        return $Comics;
+        $Comics = $request->all();
+        // Validation TODO:
+        Comic::create($Comics);
+        return redirect()->route('comics.index');
+        // $Comics = new Comic;
+        // $Comics->title = $request->item["title"];
+        // $Comics->description = $request->item["description"];
+        // $Comics->thumb = $request->item["thumb"];
+        // $Comics->price = $request->item["price"];
+        // $Comics->series = $request->item["series"];
+        // $Comics->sale_date = $request->item["sale_date"];
+        // $Comics->type = $request->item["type"];
+        // $Comics->save();
+        // return $Comics;
     }
 
     /**
@@ -56,11 +60,9 @@ class ComicController extends Controller
      */
     public function show(Comic $comic)
     {
-        $comics = Comic::find($comic);
-        if ($comics) {
-            return $comics;
-        }
-        return view('comics.show', compact('comics'));
+        return view('comics.show', [
+            'comic'     => $comic,
+        ]);
     }
 
     /**
@@ -92,11 +94,19 @@ class ComicController extends Controller
      * @param  \App\Comic  $comic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comic $comic)
+    // public function destroy(Comic $comic)
+    // {
+    //     $comics = Comic::find($comic);
+    //     if ($comics) {
+    //         $comics->destroy();
+    //         return redirect()->back();
+    //     }
+    // }
+    public function destroy($id)
     {
-        $comics = Comic::find($comic);
-        if ($comics) {
-            $comics->delete();
+        $existingItem = Comic::find($id);
+        if ($existingItem) {
+            $existingItem->delete();
             return redirect()->back();
         }
         return 'item not found';
