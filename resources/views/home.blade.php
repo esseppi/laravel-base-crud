@@ -7,7 +7,7 @@
                 @foreach ($comics as $comic)
                     <div class="card-group">
                         <div class="card my-3">
-                            <img src="{{ $comic['thumb'] }}" class="card-img-top" alt="...">
+                            <img src="{{ $comic['thumb'] }}" class="card-img-top" alt="{{ $comic['title'] }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $comic['title'] }}</h5>
                                 <p class="card-text">{{ $comic['price'] }}</p>
@@ -47,14 +47,12 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
             <div class="d-flex justify-content-center">
-
                 {{ $comics->links() }}
             </div>
         </div>

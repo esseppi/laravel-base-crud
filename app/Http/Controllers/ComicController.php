@@ -149,9 +149,6 @@ class ComicController extends Controller
     public function search(Request $request)
     {
         $search_text = $_GET['query'];
-        if ($search_text = '') {
-            return;
-        }
         $comics = Comic::where('title', 'LIKE', '%' . $search_text . '%')->get();
         return view('comics.search', compact('comics'));
     }
