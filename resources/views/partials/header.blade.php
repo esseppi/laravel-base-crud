@@ -4,10 +4,10 @@
             <a href="{{ route('home') }}" class="navbar-brand">COMICS</a>
             <div class="d-flex">
                 <div class="mr-2">
-                    <a href="{{ route('comics.create') }}" class="btn btn-info text-nowrap mr-2">Add a Comic</a>
+                    <a href="{{ route('comics.create') }}" class="btn btn-secondary text-nowrap me-2">Add a Comic</a>
                 </div>
-                <form class="d-flex">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <form action="{{ url('/search') }}" type="get" class="d-flex">
+                    <input class="form-control" name="query" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>

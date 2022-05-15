@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Comic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class ComicController extends Controller
 {
+    protected $validationRules = [
+        'title'             => 'required|unique:comics|min:5|max:100',
+        'thumb'             => 'url|max:250',
+        'description'       => 'max:250',
+        'price'             => 'required|numeric|max:3',
+        'series'            => 'max:150',
+        'type'              => 'string|min:3|max:90',
+        'sale_date'         => 'before_or_equal:date',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -36,10 +47,20 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        $Comics = $request->all();
-        // Validation TODO:
-        Comic::create($Comics);
-        return redirect()->route('comics.index');
+        $this->validationRules = [
+            'title'             => 'required|unique:comics|min:5|max:100',
+            'thumb'             => 'url|max:2000',
+            'description'       => 'max:250',
+            'price'             => 'required|numeric',
+            'series'            => 'max:150',
+            'type'              => 'string|min:3|max:90',
+            'sale_date'         => 'date',
+        ];
+        // validazion
+        $request->validate($this->validationRules);
+        $formData = $request->all();
+        $comics = Comic::create($formData);
+        return redirect()->route('comics.show', $comics->id);
         // $Comics = new Comic;
         // $Comics->title = $request->item["title"];
         // $Comics->description = $request->item["description"];
@@ -73,6 +94,15 @@ class ComicController extends Controller
      */
     public function edit(Comic $comic)
     {
+        $this->validationRules = [
+            'title'             => 'required|unique:comics|min:5|max:100',
+            'thumb'             => 'url|max:2000',
+            'description'       => 'max:250',
+            'price'             => 'required|numeric|max:3',
+            'series'            => 'max:150',
+            'type'              => 'string|min:3|max:90',
+            'sale_date'         => 'before_or_equal:date',
+        ];
         return view('comics.edit', compact('comic'));
     }
 
@@ -116,7 +146,7 @@ class ComicController extends Controller
         return 'item not found';
     }
 
-    public function search()
+    public function search(Request $request)
     {
         $search_text = $_GET['query'];
         if ($search_text = '') {
