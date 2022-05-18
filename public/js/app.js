@@ -19378,21 +19378,22 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // const form = document.querySelector(".deleteForm");
-// document.querySelectorAll(".deleteButton").forEach((button) => {
-//     button.addEventListener("click", function () {
-//         form.action = confirmationForm.dataset.base + "/" + this.dataset.id;
-//     });
-// });
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-
-var button = document.querySelectorAll(".deleteButton");
-var form = document.querySelector(".deleteForm");
-button.forEach(function (btn) {
-  btn.addEventListener("click", function () {
-    form.action = confirmationForm.dataset.base + "/" + this.dataset.id;
+var form = document.querySelector("#deleteForm");
+document.querySelectorAll(".deleteButton").forEach(function (button) {
+  button.addEventListener("click", function () {
+    form.action = form.dataset.base + "/" + this.dataset.id;
   });
 });
+console.log(form);
+console.log("click"); // const button = document.querySelectorAll(".deleteButton");
+// const form = document.querySelector(".deleteForm");
+// button.forEach((btn) => {
+//     btn.addEventListener("click", function () {
+//         form.action = this.dataset.base + "/" + this.dataset.id;
+//     });
+// });
 
 /***/ }),
 
