@@ -25,8 +25,7 @@ crossorigin=anonymous></script>
                                 <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-secondary">Edit</a>
                                 {{-- trigger delete button --}}
                                 <button type="button" class="btn btn-danger deleteButton" data-bs-toggle="modal"
-                                    data-base="{{ route('comics.index') }}" data-id="{{ $comic->id }}"
-                                    data-bs-target="#staticBackdrop">
+                                    data-id="{{ $comic->id }}" data-bs-target="#staticBackdrop">
                                     Delete
                                 </button>
 
@@ -52,7 +51,7 @@ crossorigin=anonymous></script>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             {{-- action="{{ route('comics.destroy', $comic->id) }}" --}}
-                            <form method="POST" id="deleteForm">
+                            <form method="POST" data-base="{{ route('comics.index') }}" id="deleteForm">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
