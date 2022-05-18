@@ -136,9 +136,12 @@ class ComicController extends Controller
     //         return redirect()->back();
     //     }
     // }
-    public function destroy(Comic $comic)
+    public function destroy($id)
     {
-        $comic->delete();
+        dd($id);
+        Comic::destroy($id);
+
+
         return redirect()->route('comics.index');
     }
 

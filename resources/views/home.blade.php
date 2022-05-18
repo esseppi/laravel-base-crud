@@ -52,7 +52,7 @@ crossorigin=anonymous></script>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             {{-- action="{{ route('comics.destroy', $comic->id) }}" --}}
-                            <form method="POST" class="deleteForm">
+                            <form method="POST" id="deleteForm">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>

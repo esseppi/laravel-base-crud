@@ -19378,8 +19378,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // const button = document.querySelector(".deleteButton");
-// var form = document.querySelector(".deleteForm");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // const form = document.querySelector(".deleteForm");
 // document.querySelectorAll(".deleteButton").forEach((button) => {
 //     button.addEventListener("click", function () {
 //         form.action = confirmationForm.dataset.base + "/" + this.dataset.id;
