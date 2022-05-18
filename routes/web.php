@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'ComicController@index')->name('home');
 Route::resource('/comics', 'ComicController');
 Route::get('/search', 'ComicController@search')->name('search');
-Route::get('/', 'ComicController@index')->name('home');

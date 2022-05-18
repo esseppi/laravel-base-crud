@@ -19380,6 +19380,14 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+var confirmationForm = document.querySelector(".form");
+document.querySelectorAll(".btn-delete").forEach(function (button) {
+  button.addEventListener("click", function () {
+    // mostrare l'overlay di conferma
+    confirmationForm.action = confirmationForm.dataset.base + "/" + this.dataset.id;
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

@@ -136,19 +136,15 @@ class ComicController extends Controller
     //         return redirect()->back();
     //     }
     // }
-    public function destroy($id)
+    public function destroy(Comic $comic)
     {
-        $existingItem = Comic::find($id);
-        if ($existingItem) {
-            $existingItem->delete();
-            return redirect()->back();
-        }
-        return 'item not found';
+        $comic->delete();
+        return redirect()->route('comics.index');
     }
 
     public function search(Request $request)
     {
-        $search_text = $_GET['query'];
+        $search_text = $request->query('query');
         $comics = Comic::where('title', 'LIKE', '%' . $search_text . '%')->get();
         return view('comics.search', compact('comics'));
     }

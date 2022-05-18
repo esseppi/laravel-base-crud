@@ -1,3 +1,11 @@
+<script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+crossorigin=anonymous></script>
+<script>
+    $('.addAttr').click(function() {
+        var id = $(this).data('id');
+        $('#id').val(id);
+    });
+</script>
 @extends('template.base')
 @section('css', './css/app.css')
 @section('main')
@@ -16,7 +24,8 @@
                                 <a href="{{ route('comics.show', $comic->id) }}" class="btn btn-primary">Info</a>
                                 <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-secondary">Edit</a>
                                 {{-- trigger delete button --}}
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-danger deleteButton" data-bs-toggle="modal"
+                                    data-base="{{ route('comics.index') }}" data-id="{{ $comic->id }}"
                                     data-bs-target="#staticBackdrop">
                                     Delete
                                 </button>
@@ -38,7 +47,8 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <form action="{{ route('comics.destroy', $comic->id) }}" method="post">
+                                                {{-- action="{{ route('comics.destroy', $comic->id) }}" --}}
+                                                <form method="POST" class="deleteForm">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Delete</button>
